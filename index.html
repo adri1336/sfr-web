@@ -3,9 +3,30 @@
         <meta charset="UTF-8">
         <link rel="stylesheet" href="styles.css">
 		<title>Super Freeroam</title>
+        <script>
+            function httpGetAsync(theUrl, callback)
+            {
+                var xmlHttp = new XMLHttpRequest();
+                xmlHttp.onreadystatechange = function() { 
+                    if(xmlHttp.readyState == 4 && xmlHttp.status == 200)
+                    callback(xmlHttp.responseText);
+                }
+                xmlHttp.open("GET", theUrl, true);
+                xmlHttp.send(null);
+            }
+
+            httpGetAsync("http://api.super-rp.es/info/query/play.super-rp.es:7777", response => {
+                const { online } = JSON.parse(response);
+                if(typeof online === 'number') {
+                    const onlinePlayers = document.getElementById("onlinePlayers");
+                    onlinePlayers.innerHTML = "Hay " + online + " jugadores conectados.";
+                }
+            });
+        </script>
     </head>
     <body>
         <img src="assets/logo.png" style="width: 400px;">
+        <h2 id="onlinePlayers">Hay 0 jugadores conectados.</h2>
         <div id="nav">
             <a href="samp://play.super-rp.es:7777">jugar</a>
             <a href="https://discord.gg/VBQCMts" target="_blank">discord</a>
