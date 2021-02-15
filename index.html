@@ -15,7 +15,7 @@
                 xmlHttp.send(null);
             }
 
-            httpGetAsync("http://api.super-rp.es/info/query/play.super-rp.es:7777", response => {
+            httpGetAsync("https://api.super-rp.es/info/query/play.super-rp.es:7777", response => {
                 const { online } = JSON.parse(response);
                 if(typeof online === 'number') {
                     const onlinePlayers = document.getElementById("onlinePlayers");
